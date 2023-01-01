@@ -1,0 +1,9 @@
+accounts/register.php..
+home/payments.php..
+home/transaction.php..
+home/withdraw.php..
+
+admin/bonus.php..
+admin/user.php..
+admin/userdeposit.php..
+admin/withdraw.php...
