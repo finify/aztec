@@ -1,7 +1,7 @@
 <?php
 
 $sitename = "aztecmining";
-$siteurl = "http://localhost/aztecmining/";
+$siteurl = "http://localhost/aztec/";
 $sitetitle = "aztecmining - mining ,investing and trading crypto made easy";
 
 $sitelogo = $siteurl."img/aztecmininglogo.png";
