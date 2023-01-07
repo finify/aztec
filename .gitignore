@@ -3,5 +3,4 @@ assets
 img
 kycproof
 PHPMailer
-home/assets
 includes/dbconnect.php
