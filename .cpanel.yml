@@ -6,5 +6,8 @@ deployment:
     - /bin/cp -R home $DEPLOYPATH
     - /bin/cp -R includes $DEPLOYPATH
     - /bin/cp -R account $DEPLOYPATH
-    - /bin/cp -R contact.php $DEPLOYPATH
+    - /bin/cp -R about.php $DEPLOYPATH
+    - /bin/cp -R our-team.php $DEPLOYPATH
+    - /bin/cp -R terms.php $DEPLOYPATH
+    - /bin/cp -R privacy-policy.php $DEPLOYPATH
     - /bin/cp -R index.php $DEPLOYPATH
