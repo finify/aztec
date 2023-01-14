@@ -19,7 +19,7 @@ if(!isset($_GET['refcode'])){
             <span style="color:#ffcc29;font-size:18px">What you get on Aztecmining</span> <br/>
             <div class="typed-strings">
               <p>Profitable investment</p>
-              <p>Interest-free loan</p>
+              <p>Quick Withdrawal</p>
               <p>24/7 Support</p>
             </div>
             <div class="typed"></div>
@@ -35,10 +35,11 @@ if(!isset($_GET['refcode'])){
         </div>
         <div class="col-lg-6 offset-lg-1 text-center wow fadeInLeft" data-wow-delay=".5s" style="padding-top: 100px; padding-bottom: 100px">
           <!--img src="assets/images/mobile.png" class="img-fluid" alt=""/-->
-          <video width="100%" height="350" class="img-fluid" controls>
-            <source src="assets/images/bg.mp4" type="video/mp4">
+          <!-- <video width="100%" height="350" class="img-fluid" controls>
+            <source src="https://www.youtube.com/watch?v=41JCpzvnn_0" type="youtube">
             <source src="assets/images/bg.ogg" type="video/ogg"> Your browser does not support the video tag.
-          </video>
+          </video> -->
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/41JCpzvnn_0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -107,7 +108,7 @@ if(!isset($_GET['refcode'])){
               <p class="whited" style="color:white">
                 Make your investment deposit using Bitcoin or other accepted payment methods.
               </p>
-              <a href="account/login412e.php" class="btn-border text-white">Invest Funds</a>
+              <a href="account/login.php" class="btn-border text-white">Invest Funds</a>
             </div>
           </div>
         </div>
@@ -118,7 +119,7 @@ if(!isset($_GET['refcode'])){
               <p class="whited" style="color:white">
                 Now you are all setup and ready to start earning and withdraw without hassle.
               </p>
-              <a href="account/login412e.php" class="btn-border text-white">Withdraw Profit</a>
+              <a href="account/login.php" class="btn-border text-white">Withdraw Profit</a>
             </div>
           </div>
         </div>
@@ -173,6 +174,12 @@ if(!isset($_GET['refcode'])){
                                  $plan_status =$row12["plan_status"];
                                  $plan_category =$row12["plan_category"];
 
+                                 if($plan_roi_type == "daily" || $plan_roi_type == "after"){
+                                  $plan_duration_suf = "Days";
+                                 }else{
+                                  $plan_duration_suf = "Weeks";
+                                 }
+
                                  $plan_min = number_format($plan_min);
                                  if($plan_max == ""){
                                  $plan_max = "UNLIMITED";
@@ -185,7 +192,7 @@ if(!isset($_GET['refcode'])){
                                         <div class='top'>
                                           <p class='plan-tagline'>
                                             <b>
-                                            $plan_name                </b>
+                                            $plan_name  </b>
                                           </p>
                                         </div>
                                         <div class='mid text-light' style='background-color: var(--secondary_color)'>
@@ -195,7 +202,7 @@ if(!isset($_GET['refcode'])){
                                         </div>
                                         <div class='bottom'>
                                           <ul>
-                                            <li><i class='fa fa-check' style='color:#ffcc29'></i><b><span style='color:#ffcc29'>Duration:</span> $plan_duration Days</b>
+                                            <li><i class='fa fa-check' style='color:#ffcc29'></i><b><span style='color:#ffcc29'>Duration:</span> $plan_duration $plan_duration_suf</b>
                                             </li>
                                             <li><i class='fa fa-check' style='color:#ffcc29'></i><b><span style='color:#ffcc29'>Minimum:</span> $$plan_min</b>
                                             </li>
@@ -255,70 +262,84 @@ if(!isset($_GET['refcode'])){
                         <small class="text-white">All plans shown are principal inclusive.</small>
                      </div>-->
                      <div class="col-md-12">
-        <h2 class="title" style='text-align:center; margin-bottom: 20px; color: #fff'> Calculate <b>Profit</b></h2>
-        <form name="calculator">
-          <div class="form-group row">
-            <div class="col-md-3">
-                            <label class="text-warning font-weight-bold">Choose Plan</label>
-              <select class="form-control" name="percent" id="percent">
-                <option value="">Select</option>
-                                <option value="1.12">
-                  Basic: $                  50-
-                  $4999                </option>
-                                <option value="1.6">
-                  Professional: $                  5000-
-                  $19999                </option>
-                                <option value="2.4">
-                  Elite: $                  20000-
-                  Unlimited                </option>
-                                <option value="0.21">
-                  DAY-TRADING-1: $                  50-
-                  $4999                </option>
-                                <option value="0.35">
-                  DAY-TRADING-2: $                  5000-
-                  $9999                </option>
-                                <option value="0.49">
-                  DAY-TRADING-3: $                  10000-
-                  Unlimited                </option>
-                                <option value="0.1">
-                  NFP TRADE-1: $                  5000-
-                  $9999                </option>
-                                <option value="0.15">
-                  NFP TRADE-2: $                  10000-
-                  Unlimited                </option>
-                              </select>
-                          </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label class="text-warning font-weight-bold">Enter Amount</label>
-                <input type="number" name="amount" id="amount" class="form-control" aria-describedby="basic-addon1">
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label class="text-warning font-weight-bold">&nbsp;</label><br>
-                <input type="button" class="btn btn-warning" style="line-height:normal;color:#fff" value="Calculate Profit" onClick="javascript:multiply();">
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                  <label class="text-warning font-weight-bold">Net Profit</label>
-                  <h2 class="text-white">$<span id="netProfit" class="text-white">0.00</span></h2>
-                </div>
-                <div class="col-sm-6 col-xs-12">
-                  <label class="text-warning font-weight-bold">Total Return</label>
-                  <h2 class="text-white">$<span id="profit" class="text-white">0.00</span></h2>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
+                    <h2 class="title" style='text-align:center; margin-bottom: 20px; color: #fff'> Calculate <b>Profit</b></h2>
+                    <form name="calculator">
+                      <div class="form-group row">
+                        <div class="col-md-3">
+                          <label class="text-warning font-weight-bold">Choose Plan</label>
+                          <select class="form-control" name="percent" id="percent">
+                          <?php
+                          $sql1 = mysqli_query($con, "SELECT * FROM `fx_plan_category` order by category_order ASC");  
+                          $rows1 = mysqli_num_rows($sql1) ;
 
-      </div>
+                                if($rows1<1){?>
+                                    <option>No plan yet</option>
+                                <?php }else{
+
+                                
+                                    while($row11 = mysqli_fetch_array($sql1)){
+                                        $categoryid =$row11["ID"];
+                                    $category_name =$row11["category_name"];
+                                    $category_order =$row11["category_order"];
+                                    $datecreated =$row11["datecreated"];
+                                    
+                                    echo "<option disabled>$category_name PLANS</option>";
+                                    
+                                    $sql12 = mysqli_query($con, "SELECT * FROM `fx_investments_plans` WHERE plan_category='$category_name'  order by plan_order ASC");   //checking no of investments
+                                    $rows12 = mysqli_num_rows($sql12) ;
+                                    if($rows12<1){
+                                        echo "<option>No $category_name plan yet</option>";
+                                    }else{
+                                        while($row12 = mysqli_fetch_array($sql12)){
+                                        $planid =$row12["ID"];
+                                        $plan_name =$row12["plan_name"];
+                                        $plan_min =$row12["plan_min"];
+                                        $plan_max =$row12["plan_max"];
+                                        $plan_roi =$row12["plan_roi"];
+                                        $plan_roi_type =$row12["plan_roi_type"];
+                                        $plan_order =$row12["plan_order"];
+                                        $plan_duration =$row12["plan_duration"];
+                                        $plan_status =$row12["plan_status"];
+                                        $plan_category =$row12["plan_category"];
+                                        echo"<option value='$plan_min,$plan_max,$plan_roi,$plan_roi_type,$plan_duration'>$plan_name PLAN</option>";
+                
+                                        }
+                                        }
+                                    }
+                                    }
+                                ?>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="text-warning font-weight-bold">Enter Amount</label>
+                            <input type="number" name="amount" id="amount" class="form-control" aria-describedby="basic-addon1">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="text-warning font-weight-bold">&nbsp;</label><br>
+                            <input type="button" class="btn btn-warning" style="line-height:normal;color:#fff" value="Calculate Profit" onClick="javascript:multiply();">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                              <label class="text-warning font-weight-bold">Net Profit</label>
+                              <h2 class="text-white">$<span id="netProfit" class="text-white">0.00</span></h2>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                              <label class="text-warning font-weight-bold">Total Return</label>
+                              <h2 class="text-white">$<span id="profit" class="text-white">0.00</span></h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-      </div>
-    </div>
+                </div>
+              </div>
+            </div>
   </section>
 
   <section id="section-banner" data-bgcolor="var(--secondary_color)" id="profile">
@@ -674,7 +695,7 @@ if(!isset($_GET['refcode'])){
         <div class="padding40 box-rounded mb30" data-bgcolor="#c94747">
           <h3>Our Office</h3>
           <address class="s1">
-              <span><i class="id-color fa fa-map-marker fa-lg"></i>Lynton House, 7-12 Tavistock Square, London, United Kingdom, WC1H 9BQ</span>
+              <span><i class="id-color fa fa-map-marker fa-lg"></i>Aztec Group House, 11-15 Seaton Place, St Helier, Jersey, JE4 0QH</span>
                <span><i class="id-color fa fa-envelope-o fa-lg"></i><a	href="mailto:support@Aztecminingtrading.com">support@Aztecminingtrading.com</a></span>
           </address>
         

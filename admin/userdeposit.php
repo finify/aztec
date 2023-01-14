@@ -23,7 +23,7 @@ $result = mysqli_query($con,$query) ;
 $row = mysqli_fetch_array($result);
 $deposit_type =$row['deposit_type'];
 
-if($deposit_type == 0){
+if($deposit_type == 0){ //this is manually invest after deposit
     if (isset($_POST['submit']))
     {
       $usdamount = $_POST['usdamount'] ;
@@ -78,12 +78,13 @@ if($deposit_type == 0){
           if($row11){
             $refereduserid =$row11['ID'];
             $refuserbalance =$row11['balance'];
+            $refuser_withdraw_balance =$row11['withdraw_balance'];
             $refuserfirstname =$row11['firstname'];
             $refuserlastname =$row11['lastname'];
             $refuseremail =$row11['email'];
             
             $refearning = ($referral_commision / 100) * $usdamount;
-            $newrefuserbalance = $refuserbalance + $refearning;
+            $newrefuserbalance = $refuser_withdraw_balance + $refearning;
               $created = date("Y/m/d");
       
       
@@ -137,7 +138,7 @@ if($deposit_type == 0){
         $message = wordwrap($message, 70, "\r\n");
         mailto($to, $subject, $message);  
     }
-}else{ //if deposit type is 1
+}else{ //if deposit type is 1 which is invest on deposit
   if (isset($_POST['submit']))
   {
     $usdamount = $_POST['usdamount'] ;
@@ -199,13 +200,14 @@ if($deposit_type == 0){
           if($row11){
             $refereduserid =$row11['ID'];
             $refuserbalance =$row11['balance'];
+            $refuser_withdraw_balance =$row11['withdraw_balance'];
             $refuserfirstname =$row11['firstname'];
             $refuserlastname =$row11['lastname'];
             $refuseremail =$row11['email'];
             
             
             $refearning = ($referral_commision / 100) * $usdamount;
-            $newrefuserbalance = $refuserbalance + $refearning;
+            $newrefuserbalance = $refuser_withdraw_balance + $refearning;
               $created = date("Y/m/d");
       
       
@@ -303,12 +305,13 @@ if($deposit_type == 0){
           if($row11){
             $refereduserid =$row11['ID'];
             $refuserbalance =$row11['balance'];
+            $refuser_withdraw_balance =$row11['withdraw_balance'];
             $refuserfirstname =$row11['firstname'];
             $refuserlastname =$row11['lastname'];
             $refuseremail =$row11['email'];
             
             $refearning = ($referral_commision / 100) * $usdamount;
-            $newrefuserbalance = $refuserbalance + $refearning;
+            $newrefuserbalance = $refuser_withdraw_balance + $refearning;
               $created = date("Y/m/d");
       
                 $query22 = mysqli_query($con, "INSERT INTO fx_refearnings (userid,amount,fromuser,created) VALUES ('$refereduserid','$refearning','$userid','$created')");

@@ -206,6 +206,7 @@ $rows = mysqli_num_rows($sql) ;
                         > </br>
                         <input
                         name="plan_roi"
+                        step="0.01"
                         required
                         type="number"
                         id="input-first-name"
@@ -221,6 +222,7 @@ $rows = mysqli_num_rows($sql) ;
                     >
                     <select required name="plan_roi_type" class="custom-select" id="inputGroupSelect02">
                         <option value='daily'>daily</option>
+                        <option value='weekly'>weekly</option>
                         <option value='after'>after</option>
                     </select>
                 </div>
@@ -228,7 +230,7 @@ $rows = mysqli_num_rows($sql) ;
                     <div class="col-lg-12">
                     <div class="form-group">
                         <label class="form-control-label" for="input-username"
-                        >Plan Duration in days</label
+                        >Plan Duration in days or weeks</label
                         > </br>
                         <input
                         name="plan_duration"

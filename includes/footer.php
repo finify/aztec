@@ -39,7 +39,7 @@ $email =$row['email'];
          </div>
          <div class="col-lg-3">
             <div class="widget">
-               <h5 style="color: #fff">More Links</h5>
+               <!-- <h5 style="color: #fff">More Links</h5>
                <ul>
                   <li>
                      <a class="a-underline" href="terms.php" style="color: #fff">Terms of Service<span></span></a>
@@ -50,7 +50,7 @@ $email =$row['email'];
                  <li>
                      <a class="a-underline" href="index.php#faqs" style="color: #fff">FAQs<span></span></a>
                   </li>
-               </ul>
+               </ul> -->
             </div>
          </div>
          <div class="col-lg-3">

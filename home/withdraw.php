@@ -15,28 +15,18 @@ $firstname =$row['firstname'];
 $lastname =$row['lastname'];
 $useremail =$row['email'];
 $withdraw_balance =$row['withdraw_balance'];
-$eth =$row['eth'];
-$btc =$row['btc'];
-$usdt =$row['usdt'];
-
 
 //data to fill out the page
 if (isset($_POST['wallettype']))
 {
   $wallettype = $_POST['wallettype'];
-  $btc = $_POST["btc"];
-  $eth = $_POST["eth"];
-  $usdt = $_POST["usdt"];
 
   if($wallettype == 1){
     $walletname = "BTC";
-    $userwalletid = $btc;
   }elseif($wallettype == 2){
     $walletname = "ETH";
-    $userwalletid = $eth;
   }elseif($wallettype == 3){
     $walletname = "USDT";
-    $userwalletid = $usdt;
   }
 
 }
@@ -44,6 +34,7 @@ if (isset($_POST['wallettype']))
 if(isset($_POST["submit"])){
 
   $usdamount = $_POST["usdamount"];
+  $userwalletid = $_POST["userwalletid"];
  
   
   $created = date("Y/m/d");
@@ -94,17 +85,17 @@ if(isset($_POST["submit"])){
 
 
 
-  if($withdraw_balance >= $usdamount && $usdamount >=10){
-    $query1 = mysqli_query($con, "INSERT INTO fx_withdrawal (userid,gateway,amount,userwalletid ,withdrawalstatus,created) VALUES ('$userid','$walletname','$usdamount','$userwalletid','$status','$created')"); 
+    if($withdraw_balance >= $usdamount && $usdamount >=10){
+      $query1 = mysqli_query($con, "INSERT INTO fx_withdrawal (userid,gateway,amount,userwalletid ,withdrawalstatus,created) VALUES ('$userid','$walletname','$usdamount','$userwalletid','$status','$created')"); 
 
-    $newwithdraw_balance = $withdraw_balance - $usdamount;
-    $sqlquery = "UPDATE fx_userprofile 
-	  SET withdraw_balance='$newwithdraw_balance'
-	  WHERE ID='$userid' " ;
-	  $sqlresult = mysqli_query($con,$sqlquery) ;
-  }else{
-    $amounterror = "Invalid amount please try again";
-  }
+      $newwithdraw_balance = $withdraw_balance - $usdamount;
+      $sqlquery = "UPDATE fx_userprofile 
+      SET withdraw_balance='$newwithdraw_balance'
+      WHERE ID='$userid' " ;
+      $sqlresult = mysqli_query($con,$sqlquery) ;
+    }else{
+      $amounterror = "Invalid amount please try again";
+    }
   
   }
 
@@ -133,21 +124,21 @@ $withdraw_balance =$row['withdraw_balance'];
               </div>
               <div class="row">
               <?php 
-        if(isset($_POST["submit"])){
+                if(isset($_POST["submit"])){
 
-            if($withdraw_balance >= $usdamount && $usdamount >=10){
-            if($query1){
-              echo "
-              <div class='container'><div class='alert alert-success'>Your Withdraw order have been placed successfully</div></div>";
-            }
-            else {?>
-                  <div class='container'><div class='alert alert-danger'> Error occured while trying to make your investment please try again</div></div>
-            <?php }
-          }else{?>
-            <div class='container'><div class='alert alert-danger'>Please choose a valid amount</div></div>
-          <?php }
-        }
-          ?>
+                    if($withdraw_balance >= $usdamount && $usdamount >=10){
+                    if($query1){
+                      echo "
+                      <div class='container'><div class='alert alert-success'>Your Withdraw order have been placed successfully</div></div>";
+                    }
+                    else {?>
+                          <div class='container'><div class='alert alert-danger'> Error occured while trying to make your investment please try again</div></div>
+                    <?php }
+                  }else{?>
+                    <div class='container'><div class='alert alert-danger'>Please choose a valid amount</div></div>
+                  <?php }
+                }
+              ?>
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                     <h2 class="h2 text-default mb-4">
@@ -157,13 +148,12 @@ $withdraw_balance =$row['withdraw_balance'];
                         <h4 class="card-title">Withdraw</h4>
                         <form class="forms-sample" method="POST" action="">
                             <div class="form-group">
-                                <label for="exampleSelectGender">Gender</label>
+                                <label for="exampleSelectGender">Wallet type</label>
                                 <select  name="wallettype" class="form-control" id="exampleSelectGender">
                                 <option selected>Choose...</option>
                                 <option value="1">Bitcoin</option>
-                                <option value="2">Litecoin</option>
-                                <option value="3">Ethereum</option>
-                                <option value="4">Binance</option>
+                                <option value="2">Ethereum</option>
+                                <option value="3">Usdt</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -180,74 +170,6 @@ $withdraw_balance =$row['withdraw_balance'];
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                      <div class="card-body">
-                        <h4 class="card-title">Withdrawal History</h4>
-                        <div class="table-responsive">
-                          <table class="table table-striped" >
-                            <thead>
-                              <tr>  
-                              <th>Amount</th>
-                                <th>Payment method</th>
-                                <th>Wallet id</th>
-                                <th>Status</th>
-                                <th>created</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            if($rows<1){?>
-                            <div class="alert alert-warning" role="alert">
-                            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                            <span class="alert-text"><strong>Warning!</strong> You have not made any withdrawals yet</span>
-                            </div>
-                            <?php
-                                }else{
-                                while($row4 = mysqli_fetch_array($sql4)){
-                                    $amount =$row4["amount"];
-                                    $gateway =$row4["gateway"];
-                                    $userwalletid =$row4["userwalletid"];
-                                    $amount =$row4["amount"];
-                                    $amount =$row4["amount"];
-                                    $created =$row4["created"];
-                                    $withdrawalstatus =$row4["withdrawalstatus"];
-                                    if($withdrawalstatus == 0){
-                                    $withdrawalstatus = " <label class='badge badge-danger'>Pending</label>";
-                                    }else{
-                                    $withdrawalstatus = " <label class='badge badge-success'>Approved</label>";
-                                    }
-                                    echo"<tr>
-                                
-                                    <th scope='row'>
-                                    $$amount
-                                    </th>
-                                    <th scope='row'>
-                                    $gateway
-                                    </th>
-                                    <th scope='row'>
-                                    $userwalletid
-                                    </th>
-                                    <td>
-                                    $withdrawalstatus
-                                    </td>
-                                    <td>
-                                    $created
-                                    </td>
-                                </tr>             
-                                    ";
-                                }
-                                }
-                                ?>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
             </div>
             
             <?php 

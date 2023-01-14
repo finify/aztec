@@ -15,8 +15,8 @@ require('includes/dbconnect.php');//DBCONNECTION
     Account |Aztecmining </title>
   <meta name="description" content="Aztecmining is a leading, independent Digital Assets Investment platform that provides bespoke financial solutions that add value to our individual and institutional clients. We are licensed and regulated by the Securities & Exchange Commission (SEC) and Financial Industry Regulatory Authority ( FINRA ) to provide Investment Banking, Asset Management and Securities Trading services to our discerning clientele.">
   <meta name="keywords" content="Aztecmining"/>
-  <link rel="icon" type="image/png" href="upload/peer_fav.png" sizes="32x32">
-  <link rel="apple-touch-icon" sizes="180x180" href="upload/peer_fav.png">
+  <link rel="icon" type="image/png" href="../img/aztecminingfavicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/aztecminingfavicon.png">
   <link href="assets/css/src/bootstrap/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/fontawesome.min.css" rel="stylesheet">
   <style>

@@ -109,7 +109,7 @@ $kycstatus =$row11['kycstatus'];
             <form method="post" enctype="multipart/form-data" action="">
                 <div class="pl-lg-4">
                 <div class="form-group">
-                    <label for="exampleSelectGender">Gender</label>
+                    <label for="exampleSelectGender">ID Type</label>
                     <select required name="kyctype" class="form-control" id="exampleSelectGender">
                         <option value="">Choose...</option>
                         <option value="1">National ID</option>

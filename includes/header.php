@@ -21,11 +21,11 @@ require('includes/dbconnect.php');//DBCONNECTION
   <meta property="og:url" content="index.php">
   <meta property="og:site_name" content="Aztecmining">
   <meta name="theme-color" content="#9f03fb">
-  <meta property="og:image" content="account/upload/peer_fav.png"/>
+  <meta property="og:image" content="img/aztecminingfavicon.png"/>
   <link rel="canonical" href="Aztecmining.php">
   <!-- favicon & bookmark -->
-  <link rel="apple-touch-icon" sizes="144x144" href="account/upload/peer_fav.png">
-  <link rel="shortcut icon" href="account/upload/peer_fav.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="img/aztecminingfavicon.png">
+  <link rel="shortcut icon" href="img/aztecminingfavicon.png">
 
   <meta name="robots" content="index, follow"/>
   <!-- Chrome, Firefox OS and Opera -->
@@ -64,8 +64,36 @@ require('includes/dbconnect.php');//DBCONNECTION
   <script type="text/javascript" src="translate.google.com/translate_a/element7876.js?cb=googleTranslateElementInit2"></script>
   <script>
 	function multiply() {
-		amount = Number( document.calculator.amount.value );
-		percent = Number( document.calculator.percent.value );
+		//amount = Number( document.calculator.amount.value );
+		usdamount = Number(document.calculator.amount.value) ;
+		//percent = Number( document.calculator.percent.value );
+		percent = document.calculator.percent.value ;
+
+    var nameArr = percent.split(',');
+    var plan_min = Number(nameArr[0]);
+    var plan_max = Number(nameArr[1]);
+    var plan_roi = Number(nameArr[2]);
+    var plan_roi_type = Number(nameArr[3]);
+    var plan_duration = Number(nameArr[4]);
+
+    if(plan_max == ""){
+        if(usdamount >= plan_min){
+            amountearned = (((plan_roi / 100)*usdamount) * plan_duration ) + usdamount;
+            netearned = ((plan_roi / 100)*usdamount) * plan_duration ;
+            document.getElementById( "profit" ).innerHTML = thousands_separators(amountearned);
+		        document.getElementById( "netProfit" ).innerHTML = thousands_separators(netearned);
+        }
+      }else{
+        if(usdamount >= plan_min && usdamount <= plan_max){
+            amountearned = (((plan_roi / 100)*usdamount) * plan_duration ) + usdamount;
+            netearned = ((plan_roi / 100)*usdamount) * plan_duration ;
+            document.getElementById( "profit" ).innerHTML = thousands_separators(amountearned);
+		        document.getElementById( "netProfit" ).innerHTML = thousands_separators(netearned);
+        }else{
+          alert("You entered a wrong amount for the plan selected");
+        }
+      }
+
     
     function thousands_separators( num ) {
         var num_parts = num.toString().split( "." );
@@ -73,9 +101,9 @@ require('includes/dbconnect.php');//DBCONNECTION
         return num_parts.join( "." );
       };
     
-		document.getElementById( "profit" ).innerHTML = thousands_separators(( amount * percent ) + amount);
-		document.getElementById( "netProfit" ).innerHTML = thousands_separators(amount * percent);
-
+		// document.getElementById( "profit" ).innerHTML = thousands_separators(( amount * percent ) + amount);
+		// document.getElementById( "netProfit" ).innerHTML = thousands_separators(amount * percent);
+  
 	}
 </script>
 </head>

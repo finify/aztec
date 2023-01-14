@@ -20,7 +20,7 @@ $result = mysqli_query($con,$query) ;
 $row = mysqli_fetch_array($result);
 $deposit_type =$row['deposit_type'];
 
-if($deposit_type == 0){
+if($deposit_type == 0){ //manually invest after deposit
     //data to fill out the page
     if (isset($_POST['coinid']))
     {
@@ -106,7 +106,7 @@ if($deposit_type == 0){
       mailto($to1, $subject1, $message1); 
             
     }
-}else{ //what happens if deposit type is 1
+}else{ //what happens if deposit type is 1 which is invest on deposit
   //data to fill out the page
   if (isset($_POST['coinid']))
   {
@@ -155,13 +155,26 @@ if($deposit_type == 0){
     $endingdate = date("d-m-Y", $d);
 
     // $plan_duration1 = $plan_duration - 1 ;
-      $plan_returns = "";
-    for ($x = 1; $x <= $plan_duration; $x++) {
-      $d=strtotime("+$x Days");
-      $nextdate = date("d-m-Y", $d);
+    
 
-      $plan_returns = $plan_returns. ',' . $nextdate; 
-    }
+    if($plan_roi_type == "daily" || $plan_roi_type == "after"){
+        $plan_returns = "";
+        for ($x = 1; $x <= $plan_duration; $x++) {
+          $d=strtotime("+$x Days");
+          $nextdate = date("d-m-Y", $d);
+    
+          $plan_returns = $plan_returns. ',' . $nextdate; 
+        }
+     }else{
+        $plan_returns = "";
+        $plan_week = 0;
+        for ($x = 1; $x <= $plan_duration; $x++) {
+          $plan_week += 7;
+          $d=strtotime("+$plan_week Days");
+          $nextdate = date("d-m-Y", $d);
+          $plan_returns = $plan_returns. ',' . $nextdate; 
+        }
+     }
 
     if($plan_max == ""){
       if($amount >= $plan_min){
@@ -192,7 +205,8 @@ if($deposit_type == 0){
 
       $last_id = mysqli_insert_id($con);
 
-      $query1 = mysqli_query($con, "INSERT INTO fx_deposit (userid,gateway,amount,gatewayamount,gatewaywallet,usermessage,depositstatus,createdat,investmentid) VALUES ('$userid','$gateway','$usdamount','$gatewayamount','$gatewaywallet','$message','0','$created',$last_id)");
+      $query1 = mysqli_query($con, "INSERT INTO fx_deposit (userid,gateway,amount,gatewayamount,gatewaywallet,usermessage,depositstatus,createdat,investmentid) VALUES ('$userid','$gateway','$usdamount','$gatewayamount','$gatewaywallet','$message','0','$created','$last_id')");
+
 
       
           
@@ -265,7 +279,7 @@ if($deposit_type == 0){
                   <div class='container'><div class='alert alert-success'>Your deposit order have been placed Successfully , it will be approved shortly if you have made the payment</div></div>";
                 }
                 else {
-                      echo "<div class='container'><div class='alert alert-danger'>Couldnot Upload File</div></div>";
+                      echo "<div class='container'><div class='alert alert-danger'>Couldnot Deposit/div></div>";
                 }
               }else{
                 ?>

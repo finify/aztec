@@ -307,6 +307,12 @@ if($deposit_type == 1){ //invest immediately on deposit
                   $plan_status =$row12["plan_status"];
                   $plan_category =$row12["plan_category"];
 
+                  if($plan_roi_type == "daily" || $plan_roi_type == "after"){
+                    $plan_duration_suf = "Days";
+                   }else{
+                    $plan_duration_suf = "Weeks";
+                   }
+
                   if($plan_max == ""){
                     $plan_max = "∞";
                   }
@@ -337,7 +343,7 @@ if($deposit_type == 1){ //invest immediately on deposit
                     <h4
                       class='card-title h4 text-center text-default font-style-arial mb-0'
                     >
-                    $plan_roi% Profit $plan_roi_type for $plan_duration Days
+                    $plan_roi% Profit $plan_roi_type for $plan_duration $plan_duration_suf
                     </h4>
                     <h4
                       class='card-title h4 text-center text-default font-style-arial mb-0'

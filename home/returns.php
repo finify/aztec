@@ -2,15 +2,11 @@
 require('../includes/dbconnect.php');//DBCONNECTION
 $useremail = $_SESSION['useremail'];
 
-function dailyreturn() {
-  echo "daily return";
-}
 
 if($useractivestat == 0){
     $sql = mysqli_query($con, "SELECT * FROM `fx_investment` WHERE userid='$userid' AND plan_status='0'");
     $rows = mysqli_num_rows($sql) ;
     if($rows >= 1){
-        //echo $rows."]]";
         while($row1 = mysqli_fetch_array($sql)){
            
             $planid =$row1["ID"];
@@ -35,7 +31,7 @@ if($useractivestat == 0){
 
             
               
-            if($plan_roi_type == 'daily'){ //check for roi type if daily or others
+            if($plan_roi_type == 'daily' || $plan_roi_type == 'weekly'){ //check for roi type if daily or others
             
                 //return for return dates
                 $return_dates = explode (",", $plan_returns);
@@ -59,6 +55,13 @@ if($useractivestat == 0){
                                 SET amount_earned='$newamountearned'
                                 WHERE ID='$planid' " ;
                                 $sqlresult1 = mysqli_query($con,$sqlquery1) ;
+
+                                $newwithdraw_bal = $amountearned + $withdraw_balance;
+                                //update fx userprofile withdrawable balance
+                                $sqlquery1 = "UPDATE fx_userprofile 
+                                SET withdraw_balance='$newwithdraw_bal'
+                                WHERE ID='$userid' ";
+                                $sqlresult1 = mysqli_query($con,$sqlquery1) ;
                             }
                         }
                     }
@@ -72,13 +75,14 @@ if($useractivestat == 0){
                     if($currentdate >= $endingdate1){ //if date is current
                         $amountearned = ($plan_roi / 100)* $amountinvested;
                         $totalamountearned = ($amountearned*$plan_duration) + $amountinvested;
+                        
 
                         //insert to fx total earned
                         $query2 = mysqli_query($con, "INSERT INTO fx_total_earned (userid,plan,plan_id,amount_earned,created) VALUES ('$userid','$plan_name','$planid','$totalamountearned','$todaydate')");
 
                         $newamountearned = $amount_earned + $amountearned;
 
-                        $newwithdraw_bal = $totalamountearned + $withdraw_balance;
+                        $newwithdraw_bal = $amountinvested + $withdraw_balance;
                         //update fx userprofile withdrawable balance
                         $sqlquery1 = "UPDATE fx_userprofile 
                         SET withdraw_balance='$newwithdraw_bal'

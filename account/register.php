@@ -244,7 +244,6 @@ if (isset($_REQUEST['firstname']))
     </div>
 
   </div>
-  <!-- * App Capsule -->
 <?php
 include('includes/footer.php');
 ?>
