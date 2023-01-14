@@ -1,11 +1,10 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/kion16295365/public_html/
+    - export DEPLOYPATH=/home/azteucjx/aztecmining.org/
     - /bin/cp -R admin $DEPLOYPATH
     - /bin/cp -R home $DEPLOYPATH
     - /bin/cp -R includes $DEPLOYPATH
-    - /bin/cp -R signup $DEPLOYPATH
-    - /bin/cp -R login $DEPLOYPATH
+    - /bin/cp -R account $DEPLOYPATH
     - /bin/cp -R contact.php $DEPLOYPATH
     - /bin/cp -R index.php $DEPLOYPATH
