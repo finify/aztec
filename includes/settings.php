@@ -1,7 +1,7 @@
 <?php
 
 $sitename = "aztecmining";
-$siteurl = "http://localhost/aztec/";
+$siteurl = "https://aztecmining.or/";
 $sitetitle = "aztecmining - mining ,investing and trading crypto made easy";
 
 $sitelogo = $siteurl."img/aztecmininglogo.png";
@@ -11,8 +11,8 @@ $siteaddress = "address to site";
 
 //Administrator
 $siteauthor = "aztecmining";
-$site_support_email = "admin@aztecmining.org";
-$site_admin_email = "admin@aztecmining.org";
+$site_support_email = "support@aztecmining.org";
+$site_admin_email = "support@aztecmining.org";
 $location = "";
 
 $referral_commision = '10';
